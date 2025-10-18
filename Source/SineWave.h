@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    SineWave.h
-    Created: 18 Oct 2025 3:31:13pm
-    Author:  Ema
-
-  ==============================================================================
-*/
-
 #pragma once
 
 #include <juce_audio_basics/juce_audio_basics.h>
@@ -17,6 +7,10 @@ class SineWave
 public:
     void prepare(double sampleRate, int numChannels);
     void process(juce::AudioBuffer<float>& buffer);
+    float getAmplitude() const { return amplitude; }
+    float getFrequency() const { return frequency; }
+    void setAmplitude(const float newAmplitude) { amplitude = newAmplitude; }
+    void setFrequence(const float newFrequency) { frequency = newFrequency; }
 
 private:
     float amplitude = 0.2f;

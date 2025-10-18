@@ -1,15 +1,8 @@
-/*
-  ==============================================================================
-
-    This file contains the basic framework code for a JUCE plugin processor.
-
-  ==============================================================================
-*/
-
 #pragma once
 
 #include <JuceHeader.h>
 #include "SineWave.h"
+#include "SineWaveChannel.h"
 
 //==============================================================================
 /**
@@ -56,6 +49,7 @@ public:
 
 private:
     SineWave sinewave;
+    std::vector<SineWaveChannel> sineWaves;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SineWaveOscillatorAudioProcessor)
 };

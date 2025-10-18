@@ -1,16 +1,6 @@
-/*
-  ==============================================================================
-
-    SineWave.cpp
-    Created: 18 Oct 2025 3:31:13pm
-    Author:  Ema
-
-  ==============================================================================
-*/
-
 #include "SineWave.h"
 
-void SineWave::prepare(double sampleRate, int numChannels)
+void SineWave::prepare(const double sampleRate, const int numChannels)
 {
     currentSampleRate = static_cast<float>(sampleRate); // double to float
     // time increment is dependent on sample rate
