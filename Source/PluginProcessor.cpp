@@ -95,6 +95,7 @@ void SineWaveOscillatorAudioProcessor::prepareToPlay (double sampleRate, int sam
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
+    sinewave.prepare(sampleRate, getTotalNumOutputChannels());
 }
 
 void SineWaveOscillatorAudioProcessor::releaseResources()
@@ -156,6 +157,8 @@ void SineWaveOscillatorAudioProcessor::processBlock (juce::AudioBuffer<float>& b
 
         // ..do something to the data...
     }
+
+    sinewave.process(buffer);
 }
 
 //==============================================================================

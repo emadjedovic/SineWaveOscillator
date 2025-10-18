@@ -9,6 +9,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "SineWave.h"
 
 //==============================================================================
 /**
@@ -54,6 +55,7 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
 private:
+    SineWave sinewave;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SineWaveOscillatorAudioProcessor)
 };
