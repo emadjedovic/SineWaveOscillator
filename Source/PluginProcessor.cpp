@@ -85,10 +85,12 @@ void SineWaveOscillatorAudioProcessor::changeProgramName(int index, const juce::
 //==============================================================================
 void SineWaveOscillatorAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
-	// sinewave.prepare(sampleRate, getTotalNumOutputChannels());
+	sinewave.prepare(sampleRate, getTotalNumOutputChannels());
+	/*
 	sineWaves.resize(getTotalNumOutputChannels());
 	for (auto& wave : sineWaves)
 		wave.prepare(sampleRate);
+		*/
 }
 
 void SineWaveOscillatorAudioProcessor::releaseResources()
@@ -133,15 +135,17 @@ void SineWaveOscillatorAudioProcessor::processBlock(juce::AudioBuffer<float>& bu
 	/*
 	for (int channel = 0; channel < totalNumInputChannels; ++channel)
 		auto* channelData = buffer.getWritePointer(channel);
+		*/
 
 	sinewave.process(buffer);
-	*/
 
+	/*
 	for (int channel = 0; channel < buffer.getNumChannels(); channel++)
 	{
 		auto* output = buffer.getWritePointer(channel);
 		sineWaves[channel].process(output, buffer.getNumSamples());
 	}
+	*/
 }
 
 //==============================================================================

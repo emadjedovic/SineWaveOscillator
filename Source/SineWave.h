@@ -5,19 +5,20 @@
 class SineWave
 {
 public:
-    void prepare(double sampleRate, int numChannels);
+    void prepare(double rate, int numChannels);
     void process(juce::AudioBuffer<float>& buffer);
+
     float getAmplitude() const { return amplitude; }
     float getFrequency() const { return frequency; }
     void setAmplitude(const float newAmplitude) { amplitude = newAmplitude; }
     void setFrequence(const float newFrequency) { frequency = newFrequency; }
 
 private:
-    float amplitude = 0.2f;
-    float frequency = 440.0f;
-    float currentSampleRate = 0.0f;
-    float timeIncrement = 0.0f;
-
+    // keep track of time seperately for each channel of audio
     std::vector<float> currentTime;
-     
+    float frequency = 440.0f;
+    float amplitude = 0.00f;
+    float sampleRate = 0.0f;
+    float timeIncrement = 0.0f;
+    static constexpr float pi_f = 3.14159265358979323846f;
 };

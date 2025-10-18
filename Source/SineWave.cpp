@@ -1,10 +1,10 @@
 #include "SineWave.h"
 
-void SineWave::prepare(const double sampleRate, const int numChannels)
+void SineWave::prepare(const double rate, const int numChannels)
 {
-    currentSampleRate = static_cast<float>(sampleRate); // double to float
+    sampleRate = static_cast<float>(rate); // double to float
     // time increment is dependent on sample rate
-    timeIncrement = 1.0f / currentSampleRate;
+    timeIncrement = 1.0f / sampleRate;
     currentTime.resize(numChannels, 0.0f);
 }
 

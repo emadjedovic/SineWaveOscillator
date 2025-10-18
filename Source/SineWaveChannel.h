@@ -1,8 +1,6 @@
 #pragma once
 #include <cmath>
 
-constexpr float pi_f = 3.14159265358979323846f;
-
 class SineWaveChannel
 {
 public:
@@ -19,4 +17,5 @@ private:
     float currentSampleRate = 0.0f;
     float timeIncrement = 0.0f;
     float currentTime = 0.0f;
+    static constexpr float pi_f = 3.14159265358979323846f;
 };
