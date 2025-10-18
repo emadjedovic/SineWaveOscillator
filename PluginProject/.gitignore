@@ -1,0 +1,79 @@
+# JUCE Build and Binary Files
+Builds/
+cmake-build-*/
+build/
+bin/
+obj/
+*.o
+*.obj
+*.pdb
+*.ilk
+*.idb
+*.dll
+*.exe
+*.so
+*.dylib
+*.a
+*.lib
+*.exp
+
+# JUCE auto-generated files
+JuceLibraryCode/
+JuceLibraryCode/*
+*.jucer.lock
+*.jucer.cache
+
+# IDE and Compiler Files
+# Visual Studio
+.vs/
+*.vcxproj.user
+*.suo
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.VC.opendb
+
+# Xcode
+*.xcworkspace/
+xcuserdata/
+DerivedData/
+*.xcuserstate
+
+# CLion / JetBrains
+.idea/
+cmake-build-debug/
+cmake-build-release/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Audio Plugin Builds
+*.vst
+*.vst3
+*.component
+*.au
+*.aaxplugin
+*.dll
+*.so
+*.dylib
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# OS or user-specific
+*.swp
+*.swo
+*.bak
+*.old
+*.user
+*.orig
+
+# Python / Scripts (optional)
+__pycache__/
+*.pyc
