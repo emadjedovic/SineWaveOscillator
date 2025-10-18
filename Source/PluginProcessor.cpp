@@ -10,7 +10,7 @@
 #include "PluginEditor.h"
 
 //==============================================================================
-PluginProjectAudioProcessor::PluginProjectAudioProcessor()
+SineWaveOscillatorAudioProcessor::SineWaveOscillatorAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
      : AudioProcessor (BusesProperties()
                      #if ! JucePlugin_IsMidiEffect
@@ -24,17 +24,17 @@ PluginProjectAudioProcessor::PluginProjectAudioProcessor()
 {
 }
 
-PluginProjectAudioProcessor::~PluginProjectAudioProcessor()
+SineWaveOscillatorAudioProcessor::~SineWaveOscillatorAudioProcessor()
 {
 }
 
 //==============================================================================
-const juce::String PluginProjectAudioProcessor::getName() const
+const juce::String SineWaveOscillatorAudioProcessor::getName() const
 {
     return JucePlugin_Name;
 }
 
-bool PluginProjectAudioProcessor::acceptsMidi() const
+bool SineWaveOscillatorAudioProcessor::acceptsMidi() const
 {
    #if JucePlugin_WantsMidiInput
     return true;
@@ -43,7 +43,7 @@ bool PluginProjectAudioProcessor::acceptsMidi() const
    #endif
 }
 
-bool PluginProjectAudioProcessor::producesMidi() const
+bool SineWaveOscillatorAudioProcessor::producesMidi() const
 {
    #if JucePlugin_ProducesMidiOutput
     return true;
@@ -52,7 +52,7 @@ bool PluginProjectAudioProcessor::producesMidi() const
    #endif
 }
 
-bool PluginProjectAudioProcessor::isMidiEffect() const
+bool SineWaveOscillatorAudioProcessor::isMidiEffect() const
 {
    #if JucePlugin_IsMidiEffect
     return true;
@@ -61,50 +61,50 @@ bool PluginProjectAudioProcessor::isMidiEffect() const
    #endif
 }
 
-double PluginProjectAudioProcessor::getTailLengthSeconds() const
+double SineWaveOscillatorAudioProcessor::getTailLengthSeconds() const
 {
     return 0.0;
 }
 
-int PluginProjectAudioProcessor::getNumPrograms()
+int SineWaveOscillatorAudioProcessor::getNumPrograms()
 {
     return 1;   // NB: some hosts don't cope very well if you tell them there are 0 programs,
                 // so this should be at least 1, even if you're not really implementing programs.
 }
 
-int PluginProjectAudioProcessor::getCurrentProgram()
+int SineWaveOscillatorAudioProcessor::getCurrentProgram()
 {
     return 0;
 }
 
-void PluginProjectAudioProcessor::setCurrentProgram (int index)
+void SineWaveOscillatorAudioProcessor::setCurrentProgram (int index)
 {
 }
 
-const juce::String PluginProjectAudioProcessor::getProgramName (int index)
+const juce::String SineWaveOscillatorAudioProcessor::getProgramName (int index)
 {
     return {};
 }
 
-void PluginProjectAudioProcessor::changeProgramName (int index, const juce::String& newName)
+void SineWaveOscillatorAudioProcessor::changeProgramName (int index, const juce::String& newName)
 {
 }
 
 //==============================================================================
-void PluginProjectAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
+void SineWaveOscillatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
 }
 
-void PluginProjectAudioProcessor::releaseResources()
+void SineWaveOscillatorAudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
-bool PluginProjectAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
+bool SineWaveOscillatorAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
 {
   #if JucePlugin_IsMidiEffect
     juce::ignoreUnused (layouts);
@@ -129,7 +129,7 @@ bool PluginProjectAudioProcessor::isBusesLayoutSupported (const BusesLayout& lay
 }
 #endif
 
-void PluginProjectAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
+void SineWaveOscillatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
@@ -159,25 +159,25 @@ void PluginProjectAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
 }
 
 //==============================================================================
-bool PluginProjectAudioProcessor::hasEditor() const
+bool SineWaveOscillatorAudioProcessor::hasEditor() const
 {
     return true; // (change this to false if you choose to not supply an editor)
 }
 
-juce::AudioProcessorEditor* PluginProjectAudioProcessor::createEditor()
+juce::AudioProcessorEditor* SineWaveOscillatorAudioProcessor::createEditor()
 {
-    return new PluginProjectAudioProcessorEditor (*this);
+    return new SineWaveOscillatorAudioProcessorEditor (*this);
 }
 
 //==============================================================================
-void PluginProjectAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
+void SineWaveOscillatorAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
 }
 
-void PluginProjectAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
+void SineWaveOscillatorAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
@@ -187,5 +187,5 @@ void PluginProjectAudioProcessor::setStateInformation (const void* data, int siz
 // This creates new instances of the plugin..
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
-    return new PluginProjectAudioProcessor();
+    return new SineWaveOscillatorAudioProcessor();
 }

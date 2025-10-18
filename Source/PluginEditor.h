@@ -14,11 +14,11 @@
 //==============================================================================
 /**
 */
-class PluginProjectAudioProcessorEditor  : public juce::AudioProcessorEditor
+class SineWaveOscillatorAudioProcessorEditor  : public juce::AudioProcessorEditor
 {
 public:
-    PluginProjectAudioProcessorEditor (PluginProjectAudioProcessor&);
-    ~PluginProjectAudioProcessorEditor() override;
+    SineWaveOscillatorAudioProcessorEditor (SineWaveOscillatorAudioProcessor&);
+    ~SineWaveOscillatorAudioProcessorEditor() override;
 
     //==============================================================================
     void paint (juce::Graphics&) override;
@@ -27,7 +27,7 @@ public:
 private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
-    PluginProjectAudioProcessor& audioProcessor;
+    SineWaveOscillatorAudioProcessor& audioProcessor;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PluginProjectAudioProcessorEditor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SineWaveOscillatorAudioProcessorEditor)
 };

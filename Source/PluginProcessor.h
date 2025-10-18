@@ -13,12 +13,12 @@
 //==============================================================================
 /**
 */
-class PluginProjectAudioProcessor  : public juce::AudioProcessor
+class SineWaveOscillatorAudioProcessor  : public juce::AudioProcessor
 {
 public:
     //==============================================================================
-    PluginProjectAudioProcessor();
-    ~PluginProjectAudioProcessor() override;
+    SineWaveOscillatorAudioProcessor();
+    ~SineWaveOscillatorAudioProcessor() override;
 
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
@@ -55,5 +55,5 @@ public:
 
 private:
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PluginProjectAudioProcessor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SineWaveOscillatorAudioProcessor)
 };

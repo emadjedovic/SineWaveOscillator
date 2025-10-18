@@ -10,20 +10,20 @@
 #include "PluginEditor.h"
 
 //==============================================================================
-PluginProjectAudioProcessorEditor::PluginProjectAudioProcessorEditor (PluginProjectAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p)
+SineWaveOscillatorAudioProcessorEditor::SineWaveOscillatorAudioProcessorEditor(SineWaveOscillatorAudioProcessor& p)
+    : AudioProcessorEditor(&p), audioProcessor(p)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     setSize (400, 600);
 }
 
-PluginProjectAudioProcessorEditor::~PluginProjectAudioProcessorEditor()
+SineWaveOscillatorAudioProcessorEditor::~SineWaveOscillatorAudioProcessorEditor()
 {
 }
 
 //==============================================================================
-void PluginProjectAudioProcessorEditor::paint (juce::Graphics& g)
+void SineWaveOscillatorAudioProcessorEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (juce::Colours::black);
@@ -33,7 +33,7 @@ void PluginProjectAudioProcessorEditor::paint (juce::Graphics& g)
     g.drawFittedText ("Hello from aemulee!", getLocalBounds(), juce::Justification::centred, 1);
 }
 
-void PluginProjectAudioProcessorEditor::resized()
+void SineWaveOscillatorAudioProcessorEditor::resized()
 {
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
