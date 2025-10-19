@@ -3,28 +3,13 @@
 
 //==============================================================================
 SineWaveOscillatorAudioProcessorEditor::SineWaveOscillatorAudioProcessorEditor(SineWaveOscillatorAudioProcessor& p)
-    : AudioProcessorEditor(&p), processorRef(p), freqSliderAttachment (processorRef.getState(), "freqHz", frequencySlider),
-    playButtonAttachment(processorRef.getState(), "play", playButton)
+    : AudioProcessorEditor(&p), processorRef(p), frequencySliderAttachment (processorRef.parameters, "frequency", frequencySlider)
 {
+    juce::ignoreUnused(processorRef);
+
     frequencySlider.setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
     frequencySlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
     addAndMakeVisible(frequencySlider);
-
-    playButton.setButtonText("Playing");
-    playButton.setToggleState(true, juce::NotificationType::dontSendNotification);
-    playButton.setClickingTogglesState(true);
-
-    playButton.setColour(juce::TextButton::ColourIds::buttonOnColourId, juce::Colours::green);
-    playButton.setColour(juce::TextButton::ColourIds::buttonColourId, juce::Colours::red);
-
-    playButton.onClick = [this]()
-        {
-            // change the state of the button when it's clicked
-            const bool isPlaying = playButton.getToggleState();
-            playButton.setButtonText(isPlaying ? "Playing" : "Bypassed");
-        };
-
-    addAndMakeVisible(playButton);
 
     // frequencyLabel.setColour(juce::Label::ColourIds::outlineColourId, juce::Colours::white);
     frequencyLabel.setJustificationType(juce::Justification::centred);
@@ -52,5 +37,4 @@ void SineWaveOscillatorAudioProcessorEditor::resized()
 {
     frequencyLabel.setBounds(getWidth() / 2 - 60, getHeight() / 2 - 120, 120, 20);
     frequencySlider.setBounds(getWidth() / 2 - 60, getHeight() / 2 - 100, 120, 200);
-    playButton.setBounds(getWidth() / 2 - 60, getHeight() / 2 + 120, 120, 20);
 }

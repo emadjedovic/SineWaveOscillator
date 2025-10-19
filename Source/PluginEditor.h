@@ -9,7 +9,7 @@
 class SineWaveOscillatorAudioProcessorEditor  : public juce::AudioProcessorEditor
 {
 public:
-    SineWaveOscillatorAudioProcessorEditor (SineWaveOscillatorAudioProcessor&);
+    explicit SineWaveOscillatorAudioProcessorEditor (SineWaveOscillatorAudioProcessor&);
     ~SineWaveOscillatorAudioProcessorEditor() override;
 
     //==============================================================================
@@ -18,16 +18,11 @@ public:
 
 private:
     juce::Slider frequencySlider;
-    juce::TextButton playButton;
-    juce::Label frequencyLabel{ "FrequencyLabel", "Frequency" };
-
-    juce::AudioProcessorValueTreeState::SliderAttachment freqSliderAttachment;
-    juce::AudioProcessorValueTreeState::ButtonAttachment playButtonAttachment;
-
-
-    // This reference is provided as a quick way for your editor to
-    // access the processor object that created it.
+    juce::Label frequencyLabel{ "Freq Label", "Frequency" };
     SineWaveOscillatorAudioProcessor& processorRef;
+
+    juce::AudioProcessorValueTreeState::SliderAttachment frequencySliderAttachment;
+    
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SineWaveOscillatorAudioProcessorEditor)
 };

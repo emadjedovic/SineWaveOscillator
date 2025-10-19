@@ -1,13 +1,12 @@
 #pragma once
 
-#include <JuceHeader.h>
+#include <JuceHeader.h> // implies <juce_audio_processors/juce_audio_processors.h>
 #include "SineWave.h"
-#include "SineWaveChannel.h"
 
 //==============================================================================
 /**
 */
-class SineWaveOscillatorAudioProcessor  : public juce::AudioProcessor
+class SineWaveOscillatorAudioProcessor  : public juce::AudioProcessor, public juce::AudioProcessorValueTreeState::Listener
 {
 public:
     //==============================================================================
@@ -47,17 +46,23 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
-    juce::AudioProcessorValueTreeState& getState() { return state;  }
+    using APVTS = juce::AudioProcessorValueTreeState;
+    APVTS parameters;
+
+    // APVTS& getState() { return state;  }
 
 private:
-    SineWave sinewave;
     // std::vector<SineWaveChannel> sineWaves;
 
-    juce::AudioProcessorValueTreeState state;
-    juce::AudioProcessorValueTreeState::ParameterLayout createParameters();
+    APVTS::ParameterLayout createParameterLayout();
+    void parameterChanged(const juce::String& parameterID, float newValue) override;
 
+    /*
     std::atomic<float>* frequencyParam;
     std::atomic<float>* playParam;
+    */
+
+    SineWave sinewave;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SineWaveOscillatorAudioProcessor)
 };

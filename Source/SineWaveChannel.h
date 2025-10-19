@@ -1,5 +1,6 @@
 #pragma once
 #include <cmath>
+#include <juce_audio_basics/juce_audio_basics.h>
 
 class SineWaveChannel
 {
@@ -17,5 +18,6 @@ private:
     float currentSampleRate = 0.0f;
     float timeIncrement = 0.0f;
     float currentTime = 0.0f;
-    static constexpr float pi_f = 3.14159265358979323846f;
+    
+    static constexpr float doublePi = 2.0f * juce::MathConstants<float>::pi;
 };

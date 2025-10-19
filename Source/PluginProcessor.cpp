@@ -11,13 +11,15 @@ SineWaveOscillatorAudioProcessor::SineWaveOscillatorAudioProcessor()
 #endif
 		.withOutput("Output", juce::AudioChannelSet::stereo(), true)
 #endif
-	), state(*this, nullptr, "parameters", createParameters())
+	), parameters(*this, nullptr, "ParameterTree", createParameterLayout())
 #endif
 {
+	parameters.addParameterListener("frequency", this);
 }
 
 SineWaveOscillatorAudioProcessor::~SineWaveOscillatorAudioProcessor()
 {
+	parameters.removeParameterListener("frequency", this);
 }
 
 //==============================================================================
@@ -95,11 +97,6 @@ void SineWaveOscillatorAudioProcessor::prepareToPlay(double sampleRate, int samp
 	for (auto& wave : sineWaves)
 		wave.prepare(sampleRate);
 		*/
-
-	// returns std::atomic<float>*
-	frequencyParam = state.getRawParameterValue("freqHz");
-	// float shouldBePlaying = state.getRawParameterValue("play")->load(); // cast to bool?
-	playParam = state.getRawParameterValue("play");
 }
 
 void SineWaveOscillatorAudioProcessor::releaseResources()
@@ -143,12 +140,6 @@ void SineWaveOscillatorAudioProcessor::processBlock(juce::AudioBuffer<float>& bu
 	for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
 		buffer.clear(i, 0, buffer.getNumSamples());
 
-	const float freq = frequencyParam->load();
-	const bool shouldBePlaying = static_cast<bool>(playParam->load());
-
-	sinewave.setFrequency(freq);
-	sinewave.setAmplitude(shouldBePlaying ? 0.4f : 0.0f);
-
 	sinewave.process(buffer);
 
 	/*
@@ -188,31 +179,32 @@ void SineWaveOscillatorAudioProcessor::setStateInformation(const void* data, int
 	juce::ignoreUnused(data, sizeInBytes);
 }
 
-
-juce::AudioProcessorValueTreeState::ParameterLayout SineWaveOscillatorAudioProcessor::createParameters()
-{
-	return {
-		std::make_unique<juce::AudioParameterFloat>(
-			juce::ParameterID{"freqHz"},
-			"Frequency",
-			20.0f,
-			20000.0f,
-			220.0f
-		),
-			std::make_unique<juce::AudioParameterBool>(
-			juce::ParameterID{"play"},
-			"Play",
-			true
-		)
-	};
-}
-
-
-
 //==============================================================================
 // This creates new instances of the plugin..
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
 	return new SineWaveOscillatorAudioProcessor();
 }
+
+juce::AudioProcessorValueTreeState::ParameterLayout SineWaveOscillatorAudioProcessor::createParameterLayout()
+{
+	std::vector<std::unique_ptr<juce::RangedAudioParameter>> parameterList;
+	juce::NormalisableRange<float> frequencyRange{ 20.0f, 20000.0f, 0.1f, 0.5f };
+	parameterList.push_back(std::make_unique<juce::AudioParameterFloat>("frequency", "Frequency", frequencyRange, 500.0f));
+
+	return { parameterList.begin(), parameterList.end()
+	};
+}
+
+void SineWaveOscillatorAudioProcessor::parameterChanged(const juce::String& parameterID, float newValue)
+{
+	if (parameterID == "frequency")
+	{
+		sinewave.setFrequency(newValue);
+	}
+}
+
+
+
+
 
