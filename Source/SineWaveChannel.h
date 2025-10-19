@@ -9,7 +9,7 @@ public:
     float getAmplitude() const { return amplitude; }
     float getFrequency() const { return frequency; }
     void setAmplitude(const float newAmplitude) { amplitude = newAmplitude; }
-    void setFrequence(const float newFrequency) { frequency = newFrequency; }
+    void setFrequency(const float newFrequency) { frequency = newFrequency; }
 
 private:
     float amplitude = 0.2f;

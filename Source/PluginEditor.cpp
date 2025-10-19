@@ -3,11 +3,11 @@
 
 //==============================================================================
 SineWaveOscillatorAudioProcessorEditor::SineWaveOscillatorAudioProcessorEditor(SineWaveOscillatorAudioProcessor& p)
-    : AudioProcessorEditor(&p), audioProcessor(p)
+    : AudioProcessorEditor(&p), processorRef(p), freqSliderAttachment (processorRef.getState(), "freqHz", frequencySlider),
+    playButtonAttachment(processorRef.getState(), "play", playButton)
 {
     frequencySlider.setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
     frequencySlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
-    frequencySlider.setRange(0.0f, 1.0f, 0.01f);
     addAndMakeVisible(frequencySlider);
 
     playButton.setButtonText("Playing");
