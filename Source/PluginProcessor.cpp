@@ -15,6 +15,7 @@ SineWaveOscillatorAudioProcessor::SineWaveOscillatorAudioProcessor()
 #endif
 {
 	parameters.addParameterListener("frequency", this);
+	parameters.addParameterListener("play", this);
 }
 
 SineWaveOscillatorAudioProcessor::~SineWaveOscillatorAudioProcessor()
@@ -92,11 +93,12 @@ void SineWaveOscillatorAudioProcessor::prepareToPlay(double sampleRate, int samp
 {
 	juce::ignoreUnused(samplesPerBlock);
 	sinewave.prepare(sampleRate, getTotalNumOutputChannels());
+	
 	/*
 	sineWaves.resize(getTotalNumOutputChannels());
 	for (auto& wave : sineWaves)
 		wave.prepare(sampleRate);
-		*/
+	*/
 }
 
 void SineWaveOscillatorAudioProcessor::releaseResources()
@@ -147,14 +149,13 @@ void SineWaveOscillatorAudioProcessor::processBlock(juce::AudioBuffer<float>& bu
 		auto* channelData = buffer.getWritePointer(channel);
 		*/
 
-
-		/*
-		for (int channel = 0; channel < buffer.getNumChannels(); channel++)
-		{
-			auto* output = buffer.getWritePointer(channel);
-			sineWaves[channel].process(output, buffer.getNumSamples());
-		}
-		*/
+	/*
+	for (int channel = 0; channel < buffer.getNumChannels(); channel++)
+	{
+		auto* output = buffer.getWritePointer(channel);
+		sineWaves[channel].process(output, buffer.getNumSamples());
+	}
+	*/
 }
 
 //==============================================================================
@@ -191,6 +192,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SineWaveOscillatorAudioProce
 	std::vector<std::unique_ptr<juce::RangedAudioParameter>> parameterList;
 	juce::NormalisableRange<float> frequencyRange{ 20.0f, 20000.0f, 0.1f, 0.5f };
 	parameterList.push_back(std::make_unique<juce::AudioParameterFloat>("frequency", "Frequency", frequencyRange, 500.0f));
+	parameterList.push_back(std::make_unique<juce::AudioParameterBool>("play", "Play", true));
 
 	return { parameterList.begin(), parameterList.end()
 	};
@@ -201,6 +203,13 @@ void SineWaveOscillatorAudioProcessor::parameterChanged(const juce::String& para
 	if (parameterID == "frequency")
 	{
 		sinewave.setFrequency(newValue);
+	}
+	else if (parameterID == "play")
+	{
+		// Use play parameter to control amplitude
+		// 1.0 = playing, 0.0 = bypassed
+		float amplitude = newValue > 0.5f ? 0.02f : 0.0f;
+		sinewave.setAmplitude(amplitude);
 	}
 }
 
