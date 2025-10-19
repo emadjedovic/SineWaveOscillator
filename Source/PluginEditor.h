@@ -19,9 +19,13 @@ public:
 private:
     juce::Slider frequencySlider;
     juce::Label frequencyLabel{ "Freq Label", "Frequency" };
+    juce::TextButton playButton;
+
+
     SineWaveOscillatorAudioProcessor& processorRef;
 
     juce::AudioProcessorValueTreeState::SliderAttachment frequencySliderAttachment;
+    juce::AudioProcessorValueTreeState::ButtonAttachment playButtonAttachment;
     
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SineWaveOscillatorAudioProcessorEditor)

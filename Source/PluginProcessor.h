@@ -2,6 +2,7 @@
 
 #include <JuceHeader.h> // implies <juce_audio_processors/juce_audio_processors.h>
 #include "SineWave.h"
+#include "SineWaveChannel.h"
 
 //==============================================================================
 /**
@@ -52,6 +53,7 @@ public:
     // APVTS& getState() { return state;  }
 
 private:
+    SineWave sinewave;
     // std::vector<SineWaveChannel> sineWaves;
 
     APVTS::ParameterLayout createParameterLayout();
@@ -62,7 +64,6 @@ private:
     std::atomic<float>* playParam;
     */
 
-    SineWave sinewave;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SineWaveOscillatorAudioProcessor)
 };

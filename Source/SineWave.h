@@ -18,7 +18,7 @@ private:
 	// keep track of time seperately for each channel of audio
 	std::vector<float> currentTime;
 	float frequency = 440.0f;
-	float amplitude = 0.02f;
+	float amplitude = 0.00f;
 	float sampleRate = 0.0f;
 	float timeIncrement = 0.0f;
 

@@ -7,6 +7,7 @@ class SineWaveChannel
 public:
     void prepare(double sampleRate); // no more channel dependency
     void process(float* output, int numSamples); // output pointer instead of buffer
+
     float getAmplitude() const { return amplitude; }
     float getFrequency() const { return frequency; }
     void setAmplitude(const float newAmplitude) { amplitude = newAmplitude; }
