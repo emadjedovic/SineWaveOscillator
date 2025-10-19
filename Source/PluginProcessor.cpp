@@ -92,13 +92,15 @@ void SineWaveOscillatorAudioProcessor::changeProgramName(int index, const juce::
 void SineWaveOscillatorAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
 	juce::ignoreUnused(samplesPerBlock);
-	sinewave.prepare(sampleRate, getTotalNumOutputChannels());
+	// sinewave.prepare(sampleRate, getTotalNumOutputChannels());
 	
-	/*
 	sineWaves.resize(getTotalNumOutputChannels());
 	for (auto& wave : sineWaves)
 		wave.prepare(sampleRate);
-	*/
+
+	// call parameterChanged manually with the current values
+	parameterChanged("frequency", parameters.getRawParameterValue("frequency")->load());
+	parameterChanged("play", parameters.getRawParameterValue("play")->load());
 }
 
 void SineWaveOscillatorAudioProcessor::releaseResources()
@@ -142,20 +144,13 @@ void SineWaveOscillatorAudioProcessor::processBlock(juce::AudioBuffer<float>& bu
 	for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
 		buffer.clear(i, 0, buffer.getNumSamples());
 
-	sinewave.process(buffer);
+	// sinewave.process(buffer);
 
-	/*
-	for (int channel = 0; channel < totalNumInputChannels; ++channel)
-		auto* channelData = buffer.getWritePointer(channel);
-		*/
-
-	/*
 	for (int channel = 0; channel < buffer.getNumChannels(); channel++)
 	{
 		auto* output = buffer.getWritePointer(channel);
 		sineWaves[channel].process(output, buffer.getNumSamples());
 	}
-	*/
 }
 
 //==============================================================================
@@ -202,14 +197,19 @@ void SineWaveOscillatorAudioProcessor::parameterChanged(const juce::String& para
 {
 	if (parameterID == "frequency")
 	{
-		sinewave.setFrequency(newValue);
+		// sinewave.setFrequency(newValue);
+		for (auto& wave : sineWaves)
+			wave.setFrequency(newValue);
 	}
 	else if (parameterID == "play")
 	{
 		// Use play parameter to control amplitude
 		// 1.0 = playing, 0.0 = bypassed
 		float amplitude = newValue > 0.5f ? 0.02f : 0.0f;
-		sinewave.setAmplitude(amplitude);
+		// sinewave.setAmplitude(amplitude);
+
+		for (auto& wave : sineWaves)
+			wave.setAmplitude(amplitude);
 	}
 }
 
