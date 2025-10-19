@@ -53,16 +53,11 @@ public:
     // APVTS& getState() { return state;  }
 
 private:
-    SineWave sinewave;
-    // std::vector<SineWaveChannel> sineWaves;
+    // SineWave sinewave;
+    std::vector<SineWaveChannel> sineWaves;
 
     APVTS::ParameterLayout createParameterLayout();
     void parameterChanged(const juce::String& parameterID, float newValue) override;
-
-    /*
-    std::atomic<float>* frequencyParam;
-    std::atomic<float>* playParam;
-    */
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SineWaveOscillatorAudioProcessor)
