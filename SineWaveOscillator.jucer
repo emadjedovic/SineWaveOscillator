@@ -2,8 +2,13 @@
 
 <JUCERPROJECT id="lBnK2b" name="SineWaveOscillator" projectType="audioplug"
               useAppConfig="0" addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1"
-              pluginFormats="buildStandalone,buildVST3" pluginManufacturer="Aemulee Audio">
+              pluginFormats="buildStandalone,buildVST3" pluginManufacturer="Aemulee Audio"
+              binaryDataNamespace="BinaryData">
   <MAINGROUP id="jUIgTS" name="SineWaveOscillator">
+    <GROUP id="{79DB12EC-D97A-C977-BEB6-50E10069917D}" name="Recources">
+      <FILE id="tAmsRp" name="logo_aemulee_200.png" compile="0" resource="1"
+            file="Resources/logo_aemulee_200.png"/>
+    </GROUP>
     <GROUP id="{551F8D69-1430-B361-DF4D-F3FC82816446}" name="Source">
       <FILE id="il6tl1" name="SineWaveChannel.cpp" compile="1" resource="0"
             file="Source/SineWaveChannel.cpp"/>

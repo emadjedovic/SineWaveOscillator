@@ -2,6 +2,7 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "BinaryData.h"
 
 //==============================================================================
 /**
@@ -17,6 +18,7 @@ public:
     void resized() override;
 
 private:
+    juce::Image logo;
     juce::Slider frequencySlider;
     juce::Label frequencyLabel{ "Freq Label", "Frequency" };
     juce::TextButton playButton;
