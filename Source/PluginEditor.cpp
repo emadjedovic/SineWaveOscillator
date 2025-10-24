@@ -12,8 +12,9 @@ SineWaveOscillatorAudioProcessorEditor::SineWaveOscillatorAudioProcessorEditor(S
     logo = juce::ImageFileFormat::loadFrom(imageStream);
 
     frequencySlider.setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
-    frequencySlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
+    frequencySlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 75, 15);
     frequencySlider.setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::whitesmoke);
+    frequencySlider.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colour(0x00000000));
     addAndMakeVisible(frequencySlider);
 
     frequencyLabel.setColour(juce::Label::ColourIds::textColourId, juce::Colours::whitesmoke);
@@ -36,7 +37,7 @@ SineWaveOscillatorAudioProcessorEditor::SineWaveOscillatorAudioProcessorEditor(S
 
     addAndMakeVisible(playButton);
 
-    setSize (300, 400);
+    setSize (200, 300);
 }
 
 SineWaveOscillatorAudioProcessorEditor::~SineWaveOscillatorAudioProcessorEditor()
@@ -56,23 +57,19 @@ void SineWaveOscillatorAudioProcessorEditor::paint (juce::Graphics& g)
 
     if (logo.isValid())
     {
-        const auto bounds = getLocalBounds();
-        const auto imageWidth = logo.getWidth() / 18;
-        const auto imageHeight = logo.getHeight() / 18;
+        const float scale = 1.0f / 18.0f;
+        const float scaledWidth = logo.getWidth() * scale;
+        const float scaledHeight = logo.getHeight() * scale;
 
-        // Draw the image, scaled
-        g.drawImage(logo,
-            0,0,
-            imageWidth, imageHeight,
-            0, 0,
-            logo.getWidth(),
-            logo.getHeight());
+        juce::Rectangle<float> logoArea(0, 0, scaledWidth, scaledHeight);
+
+        g.drawImage(logo, logoArea);
     }
 }
 
 void SineWaveOscillatorAudioProcessorEditor::resized()
 {
-    frequencyLabel.setBounds(getWidth() / 2 - 60, getHeight() / 2 - 120, 120, 20);
-    frequencySlider.setBounds(getWidth() / 2 - 60, getHeight() / 2 - 100, 120, 200);
-    playButton.setBounds(getWidth() / 2 - 50, getHeight() / 2 + 120, 100, 20);
+    frequencyLabel.setBounds(getWidth() / 2 - 55, getHeight() / 2 - 110, 110, 20);
+    frequencySlider.setBounds(getWidth() / 2 - 25, getHeight() / 2 - 90, 50, 170);
+    playButton.setBounds(getWidth() / 2 - 35, getHeight() / 2 + 90, 70, 20);
 }
